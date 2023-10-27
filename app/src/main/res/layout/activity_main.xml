@@ -35,6 +35,21 @@
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
+
+    <TextView
+        android:id="@+id/user_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Welcome to homepage" />
+
+    <Button
+        android:id="@+id/logout"
+        android:text="@string/logout"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <androidx.cardview.widget.CardView
         app:cardElevation="8dp"
         app:cardBackgroundColor="@color/orange"

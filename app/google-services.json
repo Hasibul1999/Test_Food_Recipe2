@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "483327134689",
+    "project_id": "login-register-firebase-56f26",
+    "storage_bucket": "login-register-firebase-56f26.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483327134689:android:e17354c3ab75b5b0a2a0a0",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCedjesxYAgdlOjOd3oNVEThnAzBzfMoVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483327134689:android:ab8816c16c9c3d79a2a0a0",
+        "android_client_info": {
+          "package_name": "com.example.test_food_recipe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCedjesxYAgdlOjOd3oNVEThnAzBzfMoVo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
