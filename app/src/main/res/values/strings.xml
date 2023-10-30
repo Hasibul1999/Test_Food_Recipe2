@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Test_Food_Recipe</string>
+    <string name="app_name">Food Recipe</string>
     <string name="api_key">491a57afaea84713af24733b6853375d</string>
     <string name="login">Login</string>
     <string name="email">Email</string>
@@ -8,6 +8,7 @@
     <string name="register">Register</string>
     <string name="click_to_login">Click to Login</string>
     <string name="logout">Logout</string>
+    <string name="saved_recipes">Saved recipes</string>
 
     <string-array name="tags">
         <item>main course</item>

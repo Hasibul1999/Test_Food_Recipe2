@@ -102,6 +102,13 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        findViewById(R.id.savedRecipe).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, SaveActivity.class));
+            }
+        });
     }
 
     private final RandomRecipeResponseListener randomRecipeResponseListener = new RandomRecipeResponseListener() {

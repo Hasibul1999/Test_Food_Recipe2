@@ -1,11 +1,17 @@
 package com.example.test_food_recipe.Adapters;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,12 +20,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.test_food_recipe.Listeners.RecipeClickListener;
 import com.example.test_food_recipe.Models.Recipe;
 import com.example.test_food_recipe.R;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
+import java.sql.Connection;
 import java.util.List;
 
 public class RandomRecipeAdapter extends RecyclerView.Adapter<RandomRecipeViewHolder> {
 
+    public static final String KEY_RECIPE = "KEY_RECIPE";
     Context context;
     List<Recipe> list;
     RecipeClickListener listener;
@@ -51,6 +60,34 @@ public class RandomRecipeAdapter extends RecyclerView.Adapter<RandomRecipeViewHo
                 listener.OnRecipeClicked(String.valueOf(list.get(holder.getAdapterPosition()).id));
             }
         });
+
+        holder.save_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                saveRecipe(position);
+            }
+        });
+    }
+
+    private void saveRecipe(int p) {
+
+        Recipe saveRecipe = list.get(p);
+        SharedPreferences mPrefs = context.getSharedPreferences(KEY_RECIPE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        Gson gson = new Gson();
+
+        String json = gson.toJson(saveRecipe);
+
+        Log.d("SAVE", "saveRecipe: " + json);
+        prefsEditor.putString("recipe", json);
+        prefsEditor.commit();
+
+        Toast.makeText(context, "Recipe Saved", Toast.LENGTH_SHORT).show();
+
+//        List<Connection> connections = saveRecipe.getConnections();
+//        String connectionsJSONString = new Gson().toJson(saveRecipe);
+//        editor.putString(KEY_CONNECTIONS, connectionsJSONString);
+//        editor.commit();
     }
 
     @Override
@@ -63,6 +100,7 @@ class RandomRecipeViewHolder extends RecyclerView.ViewHolder {
     CardView random_list_container;
     TextView textView_title,textView_servings,textView_likes,textView_time;
     ImageView imageView_food;
+    LinearLayout save_layout;
 
 
     public RandomRecipeViewHolder(@NonNull View itemView) {
@@ -73,5 +111,6 @@ class RandomRecipeViewHolder extends RecyclerView.ViewHolder {
         textView_likes = itemView.findViewById(R.id.textView_likes);
         textView_time = itemView.findViewById(R.id.textView_time);
         imageView_food = itemView.findViewById(R.id.imageView_food);
+        save_layout = itemView.findViewById(R.id.save);
     }
 }
