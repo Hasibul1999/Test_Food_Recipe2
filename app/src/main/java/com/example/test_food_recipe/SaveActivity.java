@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.test_food_recipe.Models.Recipe;
 import com.google.gson.Gson;
+import com.squareup.picasso.Picasso;
 
 public class SaveActivity extends AppCompatActivity {
 
@@ -32,5 +34,9 @@ public class SaveActivity extends AppCompatActivity {
 
         TextView title = findViewById(R.id.name);
         title.setText(recipe.title);
+        TextView intro = findViewById(R.id.intro);
+        intro.setText(recipe.instructions);
+        ImageView imageView = findViewById(R.id.ImageView_meal);
+        Picasso.get().load(recipe.image).into(imageView);
     }
 }

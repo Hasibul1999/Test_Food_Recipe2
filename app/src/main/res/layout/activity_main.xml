@@ -48,14 +48,20 @@
         android:text="@string/logout"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.DefaultButtonColor"
+        android:background="@color/white"
+        android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/savedRecipe"
         android:text="@string/saved_recipes"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:theme="@style/Theme.DefaultButtonColor"
+        android:textColor="@color/black"/>
 
     <androidx.cardview.widget.CardView
         app:cardElevation="8dp"
