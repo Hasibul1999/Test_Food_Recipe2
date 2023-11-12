@@ -1,17 +1,23 @@
 package com.example.test_food_recipe;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +26,7 @@ import com.example.test_food_recipe.Adapters.RandomRecipeAdapter;
 import com.example.test_food_recipe.Listeners.RandomRecipeResponseListener;
 import com.example.test_food_recipe.Listeners.RecipeClickListener;
 import com.example.test_food_recipe.Models.RandomRecipeAPIResponse;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -39,12 +46,63 @@ public class MainActivity extends AppCompatActivity {
     Button button;
     TextView textView;
     FirebaseUser user;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ActionBarDrawerToggle toggle;
+
+    ImageView imageMenu;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        imageMenu = findViewById(R.id.imageMenu);
+
+        toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Drawar click event
+        // Drawer item Click event ------
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.mHome:
+                        startActivity(new Intent(MainActivity.this, SaveActivity.class));
+                        Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawers();
+                        break;
+
+                    case R.id.mShare:
+                        Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawers();
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+
+                }
+
+                return false;
+            }
+        });
+        imageMenu = findViewById(R.id.imageMenu);
+
+        imageMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Code Here
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         dialog = new ProgressDialog(this);
         dialog.setTitle("Loading...");
@@ -81,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
 //        dialog.show();
 
         auth = FirebaseAuth.getInstance();
-        button = findViewById(R.id.logout);
+        //button = findViewById(R.id.logout);
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
         if (user == null){
@@ -93,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             textView.setText(user.getEmail());
         }
 
-        button.setOnClickListener(new View.OnClickListener() {
+       /* button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
@@ -101,14 +159,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        });
+        }); */
 
-        findViewById(R.id.savedRecipe).setOnClickListener(new View.OnClickListener() {
+        /*findViewById(R.id.savedRecipe).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, SaveActivity.class));
             }
-        });
+        });*/
     }
 
     private final RandomRecipeResponseListener randomRecipeResponseListener = new RandomRecipeResponseListener() {

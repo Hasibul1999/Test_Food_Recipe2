@@ -9,6 +9,8 @@
     <string name="click_to_login">Click to Login</string>
     <string name="logout">Logout</string>
     <string name="saved_recipes">Saved recipes</string>
+    <string name="open"></string>
+    <string name="close"></string>
 
     <string-array name="tags">
         <item>main course</item>
