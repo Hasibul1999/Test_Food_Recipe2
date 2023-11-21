@@ -1,12 +1,18 @@
 package com.example.test_food_recipe;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +24,8 @@ import com.example.test_food_recipe.Listeners.RecipeDetailsListener;
 import com.example.test_food_recipe.Listeners.SimilarRecipesListener;
 import com.example.test_food_recipe.Models.RecipeDetailsResponse;
 import com.example.test_food_recipe.Models.SimilarRecipeResponse;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -31,11 +39,67 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     ProgressDialog dialog;
     IngradientsAdapter ingradientsAdapter;
     SimilarRecipeAdapter similarRecipeAdapter;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    ActionBarDrawerToggle toggle;
+
+    ImageView imageMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_details);
+
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        imageMenu = findViewById(R.id.imageMenu1);
+
+        toggle = new ActionBarDrawerToggle(RecipeDetailsActivity.this, drawerLayout, R.string.open, R.string.close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        // Drawar click event
+        // Drawer item Click event ------
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.mHome:
+                        startActivity(new Intent(RecipeDetailsActivity.this, MainActivity.class));
+                        Toast.makeText(RecipeDetailsActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawers();
+                        break;
+                    case R.id.mSave:
+                        startActivity(new Intent(RecipeDetailsActivity.this, SaveActivity.class));
+                        Toast.makeText(RecipeDetailsActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawers();
+                        break;
+
+                    case R.id.mLogout:
+                        Toast.makeText(RecipeDetailsActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawers();
+                        FirebaseAuth.getInstance().signOut();
+                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+
+                }
+
+                return false;
+            }
+        });
+        imageMenu = findViewById(R.id.imageMenu1);
+
+        imageMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Code Here
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
 
         findViews();
 

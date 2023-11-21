@@ -75,12 +75,18 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.mHome:
-                        startActivity(new Intent(MainActivity.this, SaveActivity.class));
-                        Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, MainActivity.class));
+                        Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawers();
                         break;
 
-                    case R.id.mShare:
+                    case R.id.mSave:
+                        startActivity(new Intent(MainActivity.this, SaveActivity.class));
+                        Toast.makeText(MainActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawers();
+                        break;
+
+                    case R.id.mLogout:
                         Toast.makeText(MainActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawers();
                         FirebaseAuth.getInstance().signOut();
