@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!-- Content -->
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,7 +15,7 @@
         android:background="@color/orange"
         tools:context=".MainActivity">
 
-        <!-- Toolbar -->
+
         <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
@@ -87,7 +87,7 @@
             android:textColor="@color/black"/-->
 
 
-        <!-- SearchView CardView -->
+
         <androidx.cardview.widget.CardView
             app:cardElevation="8dp"
             app:cardBackgroundColor="@color/orange"
@@ -103,7 +103,7 @@
                 android:layout_height="match_parent"/>
         </androidx.cardview.widget.CardView>
 
-        <!-- RecyclerView -->
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_random"
             android:layout_margin="4dp"
@@ -113,7 +113,7 @@
 
     </LinearLayout>
 
-    <!-- Navigation Drawer -->
+
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"

@@ -84,10 +84,6 @@ public class RandomRecipeAdapter extends RecyclerView.Adapter<RandomRecipeViewHo
 
         Toast.makeText(context, "Recipe Saved", Toast.LENGTH_SHORT).show();
 
-//        List<Connection> connections = saveRecipe.getConnections();
-//        String connectionsJSONString = new Gson().toJson(saveRecipe);
-//        editor.putString(KEY_CONNECTIONS, connectionsJSONString);
-//        editor.commit();
     }
 
     @Override

@@ -57,10 +57,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         toggle = new ActionBarDrawerToggle(RecipeDetailsActivity.this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Drawar click event
-        // Drawer item Click event ------
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

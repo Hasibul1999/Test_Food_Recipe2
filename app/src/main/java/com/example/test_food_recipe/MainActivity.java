@@ -65,10 +65,6 @@ public class MainActivity extends AppCompatActivity {
         toggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, R.string.open, R.string.close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Drawar click event
-        // Drawer item Click event ------
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -110,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
         dialog = new ProgressDialog(this);
         dialog.setTitle("Loading...");
 
@@ -141,11 +139,9 @@ public class MainActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(spinnerSelectedListener);
 
         manager = new RequestManager(this);
-//        manager.getRandomRecipes(randomRecipeResponseListener);
-//        dialog.show();
 
+        //Database
         auth = FirebaseAuth.getInstance();
-        //button = findViewById(R.id.logout);
         textView = findViewById(R.id.user_details);
         user = auth.getCurrentUser();
         if (user == null){
